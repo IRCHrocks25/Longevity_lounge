@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Longevity Lounge - It's Time to Put Your Health First</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* CSS Variables */
+    :root {
+      --black: #0a0a0a;
+      --near-black: #141414;
+      --charcoal: #1a1a1a;
+      --dark-gray: #242424;
+      --mid-gray: #3a3a3a;
+      --light-gray: #8a8a8a;
+      --off-white: #e8e8e8;
+      --white: #ffffff;
+      
+      --pink: #ff0080;
+      --pink-bright: #ff3399;
+      --pink-dark: #cc0066;
+      --pink-glow: rgba(255, 0, 128, 0.3);
+      --pink-subtle: rgba(255, 0, 128, 0.1);
+      
+      --yellow: #ffff00;
+      --yellow-bright: #ffff33;
+      --yellow-glow: rgba(255, 255, 0, 0.3);
+      --yellow-subtle: rgba(255, 255, 0, 0.1);
+    }
+    
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+    
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--black);
+      color: var(--off-white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Grain Texture Overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+    
+    /* Utility Classes */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    /* Typography */
+    .font-jetbrains {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    
+    .font-outfit {
+      font-family: 'Outfit', sans-serif;
+    }
+    
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      background-color: var(--pink);
+      padding: 1.25rem 3rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      font-weight: 600;
+      position: relative;
+      clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+      animation: glow 3s ease-in-out infinite;
+    }
+    
+    .btn:hover {
+      background-color: var(--pink-bright);
+      transform: translateY(-4px) scale(1.02);
+    }
+    
+    .btn-small {
+      font-size: 0.7rem;
+      padding: 0.75rem 1.75rem;
+      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.5rem 0;
+      background-color: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 0, 128, 0.15);
+    }
+    
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--off-white);
+      text-decoration: none;
+    }
+    
+    .logo span {
+      color: var(--pink);
+    }
+    
+    /* Divider */
+    .divider {
+      height: 1px;
+      margin: 0;
+      background: linear-gradient(90deg, transparent, var(--pink-subtle), var(--pink-glow), var(--pink-subtle), transparent);
+    }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 140px;
+      padding-bottom: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-glow-1 {
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 800px;
+      height: 800px;
+      pointer-events: none;
+      background: radial-gradient(circle, var(--pink-glow) 0%, transparent 70%);
+      animation: pulse 6s ease-in-out infinite;
+    }
+    
+    .hero-glow-2 {
+      position: absolute;
+      bottom: -20%;
+      left: -10%;
+      width: 600px;
+      height: 600px;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(255, 0, 128, 0.15) 0%, transparent 70%);
+    }
+    
+    .hero .container {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    
+    .hero-content {
+      animation: fadeInUp 0.8s ease-out;
+    }
+    
+    .hero-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      font-weight: 600;
+    }
+    
+    .hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      font-size: clamp(1.8rem, 5.5vw, 3.8rem);
+      margin-top: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    
+    .hero h1 .pink-text {
+      color: var(--pink);
+    }
+    
+    .hero-subtitle {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: var(--light-gray);
+      margin-bottom: 1rem;
+      max-width: 900px;
+      font-weight: 400;
+    }
+    
+    .hero-description {
+      font-size: 1.125rem;
+      color: var(--light-gray);
+      max-width: 700px;
+      margin-bottom: 3rem;
+      line-height: 1.8;
+    }
+    
+    .hero-features {
+      display: flex;
+      gap: 3rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .hero-feature {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .hero-feature span:first-child {
+      font-size: 1.5rem;
+    }
+    
+    .hero-feature span:last-child {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    
+    .hero-host {
+      margin-top: 3rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light-gray);
+    }
+    
+    .hero-host .pink-text {
+      color: var(--pink);
+      font-weight: 600;
+    }
+    
+    .hero-image {
+      position: relative;
+      animation: fadeInUp 0.8s ease-out 0.7s both;
+    }
+    
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      box-shadow: 0 24px 80px rgba(255, 0, 128, 0.3);
+      clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+      transition: all 0.6s ease;
+    }
+    
+    .hero-image img:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 32px 100px rgba(255, 0, 128, 0.4), 0 0 60px rgba(255, 255, 0, 0.2);
+    }
+    
+    /* Credentials Section */
+    .credentials {
+      padding: 2rem 0;
+      background-color: var(--near-black);
+      border-top: 1px solid rgba(255, 0, 128, 0.1);
+      border-bottom: 1px solid rgba(255, 0, 128, 0.1);
+    }
+    
+    .credentials-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--light-gray);
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .credentials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1.5rem;
+      align-items: center;
+      justify-items: center;
+    }
+    
+    .credential-logo {
+      width: 120px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+      filter: grayscale(100%);
+    }
+    
+    .credential-logo:hover {
+      opacity: 1;
+      filter: grayscale(0%);
+    }
+    
+    /* Section Base Styles */
+    section {
+      padding: 120px 0;
+      position: relative;
+    }
+    
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    
+    .section-label.pink {
+      color: var(--pink);
+    }
+    
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 1.5rem;
+      line-height: 1.15;
+    }
+    
+    .section-subtitle {
+      font-size: 1.25rem;
+      color: var(--light-gray);
+      max-width: 800px;
+      line-height: 1.7;
+      margin-bottom: 4rem;
+    }
+    
+    /* Grid Layouts */
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+    
+    .grid-2 {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+    .grid-3 {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    
+    .grid-4 {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    
+    /* Card Styles */
+    .card {
+      background: linear-gradient(135deg, var(--near-black), var(--charcoal));
+      padding: 2.25rem;
+      border-left: 3px solid var(--pink);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+    
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--yellow);
+      box-shadow: 0 16px 48px rgba(255, 255, 0, 0.2), 0 0 80px rgba(255, 255, 0, 0.1);
+    }
+    
+    .card-check {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 2.5rem;
+      color: var(--pink);
+      opacity: 0.2;
+      transition: all 0.4s ease;
+    }
+    
+    .card:hover .card-check {
+      color: var(--yellow);
+      opacity: 1;
+      transform: scale(1.1) rotate(360deg);
+    }
+    
+    .card-text {
+      font-size: 1.125rem;
+      line-height: 1.7;
+      color: var(--off-white);
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Feature Box */
+    .feature-box {
+      background-color: var(--near-black);
+      padding: 2.5rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .feature-box:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, var(--near-black), var(--charcoal));
+    }
+    
+    .feature-box h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+      transition: color 0.4s ease;
+    }
+    
+    .feature-box:hover h4 {
+      color: var(--yellow);
+    }
+    
+    .feature-box p {
+      color: var(--light-gray);
+      font-size: 0.95rem;
+    }
+    
+    /* Highlight Box */
+    .highlight-box {
+      background: linear-gradient(135deg, var(--charcoal), var(--near-black));
+      padding: 3rem;
+      border: 2px solid rgba(255, 0, 128, 0.2);
+      position: relative;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
+    }
+    
+    .highlight-box:hover {
+      border-color: var(--yellow);
+      transform: scale(1.02);
+      box-shadow: 0 20px 60px rgba(255, 255, 0, 0.2);
+    }
+    
+    .highlight-box p {
+      font-size: 1.3rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      font-weight: 500;
+    }
+    
+    .highlight-box .pink-text {
+      color: var(--pink);
+      font-weight: 600;
+      transition: color 0.4s ease;
+    }
+    
+    .highlight-box:hover .pink-text {
+      color: var(--yellow);
+    }
+    
+    /* Authority Section */
+    .authority-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    
+    .authority-images {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .authority-images img {
+      width: 100%;
+      height: auto;
+      display: block;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+    }
+    
+    .authority-images img:last-child {
+      width: 115%;
+      margin-left: -7.5%;
+      transition: all 0.6s ease;
+    }
+    
+    .authority-images img:last-child:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 80px rgba(255, 0, 128, 0.3);
+    }
+    
+    .authority-content h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.25rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+    
+    .authority-subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+    
+    .authority-content p {
+      margin-bottom: 1.25rem;
+      color: var(--light-gray);
+      line-height: 1.8;
+      font-size: 1.125rem;
+    }
+    
+    .authority-content blockquote {
+      background-color: var(--near-black);
+      padding: 2rem;
+      border-left: 4px solid var(--pink);
+      margin: 2rem 0;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--off-white);
+    }
+    
+    .authority-content strong {
+      color: var(--pink);
+    }
+    
+    .credential-list {
+      display: grid;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    
+    .credential-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background-color: var(--near-black);
+      border-left: 2px solid var(--pink);
+      transition: all 0.4s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .credential-item:hover {
+      transform: translateX(8px);
+      border-color: var(--yellow);
+      box-shadow: 0 4px 20px rgba(255, 255, 0, 0.15);
+    }
+    
+    .credential-item::before {
+      content: '▸';
+      color: var(--pink);
+      font-size: 1.25rem;
+      font-weight: 700;
+      transition: all 0.4s ease;
+    }
+    
+    .credential-item:hover::before {
+      color: var(--yellow);
+      transform: translateX(4px);
+    }
+    
+    /* Pink Background Section */
+    .pink-section {
+      background: linear-gradient(to bottom right, rgba(153, 0, 76, 0.85), rgba(255, 0, 128, 0.85));
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .pink-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+    }
+    
+    .pink-section .container {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .pink-section .section-label {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .pink-section .section-title {
+      color: white;
+    }
+    
+    .pink-section .section-subtitle {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .pink-card {
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 2.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .pink-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      border-color: var(--yellow);
+      box-shadow: 0 16px 48px rgba(255, 255, 0, 0.3);
+    }
+    
+    .pink-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+      transition: color 0.4s ease;
+    }
+    
+    .pink-card:hover h3 {
+      color: var(--yellow);
+    }
+    
+    .pink-card p {
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.7;
+    }
+    
+    /* Problem Cards */
+    .problem-card {
+      background-color: var(--near-black);
+      padding: 2.5rem;
+      border-top: 4px solid var(--pink);
+      position: relative;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    
+    .problem-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px rgba(255, 255, 0, 0.15);
+      background: linear-gradient(135deg, var(--near-black), var(--charcoal));
+    }
+    
+    .problem-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background-color: var(--yellow);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    
+    .problem-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .problem-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 1rem;
+      font-weight: 600;
+      transition: color 0.4s ease;
+    }
+    
+    .problem-card:hover .problem-label {
+      color: var(--yellow);
+    }
+    
+    .problem-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    
+    .problem-card p {
+      color: var(--light-gray);
+      line-height: 1.7;
+    }
+    
+    /* Outcome Cards */
+    .outcome-card {
+      background: linear-gradient(135deg, var(--near-black), var(--charcoal));
+      padding: 2.5rem;
+      border: 1px solid rgba(255, 0, 128, 0.3);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+    
+    .outcome-card:hover {
+      transform: translateY(-12px) rotate(-2deg);
+      border-color: var(--yellow);
+      box-shadow: 0 20px 60px rgba(255, 255, 0, 0.2);
+    }
+    
+    .outcome-number {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3rem;
+      color: var(--pink);
+      opacity: 0.3;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      transition: all 0.4s ease;
+    }
+    
+    .outcome-card:hover .outcome-number {
+      color: var(--yellow);
+      opacity: 0.6;
+      transform: scale(1.1);
+    }
+    
+    .outcome-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+    }
+    
+    .outcome-card p {
+      color: var(--light-gray);
+      line-height: 1.7;
+    }
+    
+    /* Comparison Box */
+    .comparison-box {
+      background-color: var(--charcoal);
+      padding: 4rem;
+      text-align: center;
+      border: 1px solid rgba(255, 0, 128, 0.2);
+      margin-top: 4rem;
+    }
+    
+    .comparison-items {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    
+    .comparison-items span {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    
+    .comparison-items .separator {
+      color: var(--pink);
+      font-size: 2rem;
+      font-weight: 900;
+    }
+    
+    .comparison-box p {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    
+    .comparison-box strong {
+      color: var(--pink);
+    }
+    
+    .comparison-highlight {
+      font-size: 1.25rem;
+      color: var(--pink);
+      font-weight: 600;
+    }
+    
+    /* Clarity Strip */
+    .clarity-strip {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      padding: 3.5rem;
+      background-color: var(--near-black);
+      border: 1px dashed rgba(255, 0, 128, 0.3);
+    }
+    
+    .clarity-strip span {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.875rem;
+      font-weight: 600;
+    }
+    
+    .clarity-strip .strikethrough {
+      color: var(--light-gray);
+      text-decoration: line-through;
+      opacity: 0.4;
+    }
+    
+    .clarity-strip .highlight {
+      color: var(--pink);
+      font-size: 2.25rem;
+      font-weight: 900;
+    }
+    
+    /* CTA Sections */
+    .cta-section {
+      padding: 100px 0;
+      text-align: center;
+    }
+    
+    .cta-section .section-label {
+      color: var(--pink);
+      margin-bottom: 2rem;
+    }
+    
+    .cta-section h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.5;
+      max-width: 900px;
+      margin: 0 auto 2rem;
+      font-weight: 600;
+    }
+    
+    .cta-section .pink-text {
+      color: var(--pink);
+      font-weight: 900;
+    }
+    
+    .cta-section p {
+      font-size: 1.25rem;
+      color: var(--light-gray);
+      max-width: 700px;
+      margin: 0 auto 3.5rem;
+      line-height: 1.7;
+    }
+    
+    .cta-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--light-gray);
+      margin-top: 2rem;
+    }
+    
+    /* Final CTA with Background */
+    .final-cta {
+      padding: 120px 0;
+      text-align: center;
+      border-top: 1px solid var(--pink);
+      border-bottom: 1px solid var(--pink);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(to bottom right, rgba(20, 20, 20, 0.92), rgba(30, 30, 30, 0.88));
+    }
+    
+    .final-cta .container {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .final-cta .section-label {
+      color: var(--pink);
+      margin-bottom: 2rem;
+    }
+    
+    .final-cta h2 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 2rem;
+      line-height: 1.3;
+    }
+    
+    /* Last Section with Floating Element */
+    .last-section {
+      padding-top: 180px;
+      padding-bottom: 140px;
+      text-align: center;
+      position: relative;
+      overflow: visible;
+    }
+    
+    .floating-decor {
+      position: absolute;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: auto;
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: 1;
+      animation: floatAnim 8s ease-in-out infinite;
+    }
+    
+    .last-section .container {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .last-section p:first-of-type {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      color: white;
+      margin-bottom: 1.25rem;
+      font-weight: 500;
+    }
+    
+    .last-section p:nth-of-type(2) {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--off-white);
+      margin-bottom: 3.5rem;
+      font-weight: 900;
+    }
+    
+    .last-section .underline-pink {
+      color: var(--pink);
+      border-bottom: 4px solid var(--pink);
+      padding-bottom: 0.25rem;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--near-black);
+      padding: 3rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(255, 0, 128, 0.2);
+    }
+    
+    footer .logo {
+      display: block;
+      margin: 0 auto 1rem;
+      font-size: 1.75rem;
+    }
+    
+    footer p {
+      color: var(--light-gray);
+      font-size: 0.875rem;
+    }
+    
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    
+    .modal-overlay.active {
+      display: flex;
+    }
+    
+    .modal {
+      background-color: var(--charcoal);
+      max-width: 560px;
+      width: 100%;
+      padding: 4rem;
+      position: relative;
+      border: 1px solid rgba(255, 0, 128, 0.3);
+      clip-path: polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px);
+      animation: modalIn 0.3s ease-out;
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 3rem;
+      color: var(--light-gray);
+      cursor: pointer;
+      line-height: 1;
+      font-weight: 300;
+      transition: color 0.3s ease;
+    }
+    
+    .modal-close:hover {
+      color: var(--pink);
+    }
+    
+    .modal h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+      font-weight: 900;
+    }
+    
+    .modal p {
+      color: var(--light-gray);
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--off-white);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 1rem;
+      background-color: var(--near-black);
+      border: 1px solid rgba(255, 0, 128, 0.3);
+      color: var(--off-white);
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px var(--pink-subtle);
+    }
+    
+    .form-group input::placeholder {
+      color: var(--mid-gray);
+    }
+    
+    .form-submit {
+      width: 100%;
+      margin-top: 1rem;
+    }
+    
+    .form-meta {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--light-gray);
+      margin-top: 1.5rem;
+    }
+    
+    .modal-success {
+      display: none;
+      text-align: center;
+      padding: 2.5rem 0;
+    }
+    
+    .modal-success.active {
+      display: block;
+    }
+    
+    .modal-success .checkmark {
+      font-size: 3.75rem;
+      margin-bottom: 1.5rem;
+      color: var(--pink);
+    }
+    
+    .modal-success h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.875rem;
+      margin-bottom: 1rem;
+      font-weight: 900;
+    }
+    
+    .modal-success p {
+      color: var(--light-gray);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    
+    /* Animations */
+    @keyframes glow {
+      0%, 100% {
+        box-shadow: 0 0 40px var(--pink-glow), 0 0 80px rgba(255, 0, 128, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 60px var(--pink-glow), 0 0 120px rgba(255, 0, 128, 0.3);
+      }
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    @keyframes floatAnim {
+      0%, 100% {
+        transform: translate(-50%, 0) rotate(0deg);
+      }
+      50% {
+        transform: translate(-50%, -20px) rotate(8deg);
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero .container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      
+      .hero-image {
+        order: -1;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      
+      .authority-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      
+      .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+      }
+      
+      .comparison-items {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .modal {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="#" class="logo">Longevity <span>Lounge</span></a>
+      <button class="btn btn-small" onclick="openModal()">Register Free</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-label">Free Live Webinar</div>
+        <h1>
+          <span>It's Time to Put</span><br>
+          <span class="pink-text">Your Health First.</span>
+        </h1>
+        <p class="hero-subtitle">Without Slowing Down Your Life, Your Business, or Your Ambition.</p>
+        <p class="hero-description">A private webinar for high performers who want more energy, clarity, and control — now and for decades to come.</p>
+        
+        <div class="hero-features">
+          <div class="hero-feature">
+            <span>📅</span>
+            <span>Live Webinar</span>
+          </div>
+          <div class="hero-feature">
+            <span>🎟️</span>
+            <span>Free to Attend</span>
+          </div>
+          <div class="hero-feature">
+            <span>⏰</span>
+            <span>Limited Seats</span>
+          </div>
+        </div>
+        
+        <button class="btn" onclick="openModal()">Save Your Seat</button>
+        
+        <div class="hero-host">
+          Hosted by <span class="pink-text">Alessia Minkus</span>, Founder of Longevity Lounge
+        </div>
+      </div>
+      
+      <div class="hero-image">
+        <!-- Replace with actual image URL -->
+        <img src="https://res.cloudinary.com/dcuswyfur/image/upload/v1771240785/75b009ac815f215fde838856dab18460a7c12874_zv5wbz.png" alt="Alessia Minkus">
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider"></div>
+
+  <!-- Credentials Section -->
+  <section class="credentials">
+    <div class="container">
+      <div class="credentials-title">As Featured In</div>
+      <div class="credentials-grid">
+        <div class="credential-logo">Inc 5000</div>
+        <div class="credential-logo">Forbes</div>
+        <div class="credential-logo">Entrepreneur</div>
+        <div class="credential-logo">Fox Business</div>
+        <div class="credential-logo">Media</div>
+        <div class="credential-logo">CBS</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider"></div>
+
+  <!-- Who This Is For -->
+  <section>
+    <div class="container">
+      <div class="section-label">Who This Is For</div>
+      <h2 class="section-title">This conversation is for you if:</h2>
+      
+      <div class="grid grid-3" style="margin-bottom: 4rem;">
+        <div class="card">
+          <div class="card-check">✓</div>
+          <p class="card-text">You're successful — but feel like your energy costs more than it used to</p>
+        </div>
+        <div class="card">
+          <div class="card-check">✓</div>
+          <p class="card-text">You don't want health to become something you deal with later</p>
+        </div>
+        <div class="card">
+          <div class="card-check">✓</div>
+          <p class="card-text">You're tired of conflicting advice and wellness trends</p>
+        </div>
+        <div class="card">
+          <div class="card-check">✓</div>
+          <p class="card-text">You value education, autonomy, and smart decisions</p>
+        </div>
+        <div class="card">
+          <div class="card-check">✓</div>
+          <p class="card-text">You want clarity — not overwhelm</p>
+        </div>
+      </div>
+      
+      <div class="highlight-box">
+        <p>If you've ever thought: <span class="pink-text">"I'll focus on this once things slow down"</span> — this is for you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider"></div>
+
+  <!-- Authority Section -->
+  <section>
+    <div class="container">
+      <div class="authority-grid">
+        <div class="authority-images">
+          <!-- Replace with actual image URLs -->
+          <img src="https://res.cloudinary.com/dcuswyfur/image/upload/v1771240785/a7b65bcf530aceea30c905d184404f109c0baa41_voybop.png" alt="Alessia Minkus">
+          <img src="https://res.cloudinary.com/dcuswyfur/image/upload/v1771240787/e414d3dce6ca47805d47aedf017eaaac7fb344f5_fegzol.png">
+        </div>
+        
+        <div class="authority-content">
+          <div class="section-label">Meet Your Host</div>
+          <h3>Alessia Minkus</h3>
+          <div class="authority-subtitle">Founder, Longevity Lounge</div>
+          
+          <p>Alessia is a multi-award-winning entrepreneur, Inc. 5000 founder and Power Partner, and advisor to business leaders and founders around the world.</p>
+          
+          <p>She has built and scaled 10+ companies, generated hundreds of millions in revenue, and spent decades working alongside high performers.</p>
+          
+          <p>But what shaped her work in longevity wasn't business success — it was what she saw behind the scenes.</p>
+          
+          <blockquote>"The most capable, driven people I knew were often the ones quietly putting their health last."</blockquote>
+          
+          <p>After spending time with leaders like Tony Robbins and Sir Richard Branson, one pattern became undeniable:</p>
+          
+          <p><strong>They don't treat health as a side conversation. They treat it as a strategic priority.</strong></p>
+          
+          <p>This webinar is where Alessia shares how that mindset actually works.</p>
+          
+          <div class="credential-list">
+            <div class="credential-item">Multi-award-winning entrepreneur</div>
+            <div class="credential-item">Inc. 5000 founder and Power Partner</div>
+            <div class="credential-item">Built and scaled 10+ companies</div>
+            <div class="credential-item">Advisor to global business leaders</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider"></div>
+
+  <!-- Why Now Section -->
+  <section>
+    <div class="container">
+      <div class="section-label">Why Now</div>
+      <h2 class="section-title">Why most people wait too long</h2>
+      <p class="section-subtitle">Most people don't lose their health overnight. They lose options.</p>
+      
+      <div class="grid grid-3" style="margin-bottom: 4rem;">
+        <div class="feature-box">
+          <h4>Energy fades gradually</h4>
+          <p>It becomes your new normal before you realize it's changed</p>
+        </div>
+        <div class="feature-box">
+          <h4>Recovery slows quietly</h4>
+          <p>What used to take days now takes weeks</p>
+        </div>
+        <div class="feature-box">
+          <h4>Focus slips subtly</h4>
+          <p>The sharpness dulls, one percentage point at a time</p>
+        </div>
+      </div>
+      
+      <div class="highlight-box">
+        <p>By the time something feels "wrong," the conversation changes — from <span class="pink-text">choice to constraint</span>.</p>
+      </div>
+      
+      <div style="margin-top: 3rem; text-align: center;">
+        <p style="font-size: 1.25rem; color: var(--light-gray); margin-bottom: 1rem;">
+          This isn't about fear. It's about <strong style="color: var(--pink);">leverage</strong>.
+        </p>
+        <p style="font-size: 1.125rem; color: var(--off-white); max-width: 700px; margin: 0 auto;">
+          The earlier you understand what's happening in your body, the more flexibility you keep. And that window doesn't stay open forever.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider"></div>
+
+  <!-- System Failure Section -->
+  <section>
+    <div class="container">
+      <div class="section-label pink">The Real Problem</div>
+      <h2 class="section-title">Why health advice feels confusing<br>(and why it's not your fault)</h2>
+      
+      <div class="grid grid-3" style="margin-bottom: 4rem;">
+        <div class="problem-card">
+          <div class="problem-label">Problem 01</div>
+          <h3>Platforms optimize for clicks</h3>
+          <p>Algorithms reward sensationalism, not outcomes. The content that reaches you is designed to engage, not educate.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-label">Problem 02</div>
+          <h3>Extremes outperform nuance</h3>
+          <p>Moderate, evidence-based advice gets buried. What trends is usually what's most provocative — not most useful.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-label">Problem 03</div>
+          <h3>Trends replace fundamentals</h3>
+          <p>Every week there's a new protocol, supplement, or hack. The fundamentals that actually matter get lost in the noise.</p>
+        </div>
+      </div>
+      
+      <div class="comparison-box">
+        <div class="section-label">Most People Are Stuck Between</div>
+        <div class="comparison-items">
+          <span>Sensationalized wellness content</span>
+          <span class="separator">×</span>
+          <span>Reactive medical care</span>
+        </div>
+        <p>And <strong>no clear, integrated path forward</strong>.</p>
+        <p class="comparison-highlight">This webinar exists to change that.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider"></div>
+
+  <!-- Outcomes Section -->
+  <section>
+    <div class="container">
+      <div class="section-label">What You'll Get</div>
+      <h2 class="section-title">By the end of this session, you'll have:</h2>
+      
+      <div class="grid grid-4" style="margin-bottom: 4rem;">
+        <div class="outcome-card">
+          <div class="outcome-number">01</div>
+          <h3>A clearer lens</h3>
+          <p>For understanding your health — beyond symptoms, beyond trends.</p>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-number">02</div>
+          <h3>A new way to prioritize</h3>
+          <p>What actually matters for long-term performance and wellbeing.</p>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-number">03</div>
+          <h3>Fewer questions</h3>
+          <p>And better ones. The kind that lead to real answers, not more confusion.</p>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-number">04</div>
+          <h3>A sense of control</h3>
+          <p>Most people don't regain until much later — if they regain it at all.</p>
+        </div>
+      </div>
+      
+      <div class="clarity-strip">
+        <span class="strikethrough">A Checklist</span>
+        <span class="strikethrough">A Protocol</span>
+        <span class="highlight">Clarity.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider"></div>
+
+  <!-- The Bigger Picture Section -->
+  <section class="pink-section">
+    <div class="container">
+      <div class="section-label">The Bigger Picture</div>
+      <h2 class="section-title">Why Longevity Lounge Exists</h2>
+      <p class="section-subtitle">Longevity Lounge was built to support people after the realization hits. It's where education, structure, expert insight, and community come together — so health doesn't become another solo project or another thing you start and abandon.</p>
+      
+      <div class="grid grid-3">
+        <div class="pink-card">
+          <h3>Community Matters</h3>
+          <p>Why real change requires connection, accountability, and shared experience — not just information.</p>
+        </div>
+        <div class="pink-card">
+          <h3>Sustainable Progress</h3>
+          <p>How people sustain progress without obsession. No extremes. No burnout. Just consistent, informed action.</p>
+        </div>
+        <div class="pink-card">
+          <h3>Real Support</h3>
+          <p>What support actually looks like in practice — from expert-led guidance to peer-driven accountability.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider"></div>
+
+  <!-- Proof Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="section-label">What People Say</div>
+      <h2>
+        "Most people who attend say the same thing afterward:<br>
+        <span class="pink-text">I wish I had learned this earlier.</span>"
+      </h2>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider"></div>
+
+  <!-- Final CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <div class="section-label">Join the Conversation</div>
+      <h2>This is one of those conversations people rarely regret attending —<br>and often regret postponing.</h2>
+      <p>Join Alessia Minkus for a candid, no-hype conversation about what it actually takes to protect your health — while building everything else.</p>
+      <button class="btn" onclick="openModal()">Reserve Your Seat</button>
+      <div class="cta-meta">Free • Live • Limited Availability</div>
+    </div>
+  </section>
+
+  <!-- Last Section with Floating Element -->
+  <section class="last-section">
+    <!-- Floating decorative element - Replace with actual image URL -->
+    <div class="floating-decor">
+      <!-- Placeholder for decorative element -->
+      <div style="width: 200px; height: 200px; background: radial-gradient(circle, var(--pink-glow), transparent); border-radius: 50%;"></div>
+    </div>
+    
+    <div class="container">
+      <p>The best time to protect your health was years ago.</p>
+      <p>The second best time is <span class="underline-pink">now</span> while your options are still wide open.</p>
+      <button class="btn" onclick="openModal()">Save Your Seat</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <a href="#" class="logo">Longevity <span>Lounge</span></a>
+      <p>© 2026 Longevity Lounge. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      
+      <div id="modalForm">
+        <div class="section-label">Free Live Webinar</div>
+        <h3>Save Your Seat</h3>
+        <p>Register now to join Alessia Minkus for this private webinar on health, longevity, and performance.</p>
+        
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Your first name" required>
+          </div>
+          
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Your last name" required>
+          </div>
+          
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="you@example.com" required>
+          </div>
+          
+          <div class="form-group">
+            <label>Company (Optional)</label>
+            <input type="text" placeholder="Your company">
+          </div>
+          
+          <button type="submit" class="btn form-submit">Reserve My Seat</button>
+          
+          <p class="form-meta">Your information is 100% secure. We'll never share your email.</p>
+        </form>
+      </div>
+      
+      <div class="modal-success" id="modalSuccess">
+        <div class="checkmark">✓</div>
+        <h3>You're In!</h3>
+        <p>Check your inbox for confirmation and webinar details. We can't wait to see you there.</p>
+        <button class="btn" onclick="closeModal()">Got It</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Modal functionality
+    function openModal() {
+      document.getElementById('modalOverlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+      document.body.style.overflow = '';
+      // Reset modal after close
+      setTimeout(() => {
+        document.getElementById('modalForm').style.display = 'block';
+        document.getElementById('modalSuccess').classList.remove('active');
+      }, 300);
+    }
+    
+    function handleSubmit(event) {
+      event.preventDefault();
+      document.getElementById('modalForm').style.display = 'none';
+      document.getElementById('modalSuccess').classList.add('active');
+    }
+    
+    // Close modal when clicking outside
+    document.getElementById('modalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
